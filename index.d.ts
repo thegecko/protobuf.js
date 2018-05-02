@@ -1338,6 +1338,32 @@ export namespace rpc {
          */
         public end(endedByRPC?: boolean): rpc.Service;
     }
+
+    /** An RPC server as returned by {@link Server#create}. */
+    class Server extends util.EventEmitter {
+
+        /**
+         * Constructs a new RPC server instance.
+         * @param [requestDelimited=false] Whether requests are length-delimited
+         * @param [responseDelimited=false] Whether responses are length-delimited
+         */
+        constructor(requestDelimited?: boolean, responseDelimited?: boolean);
+
+        /** Whether requests are length-delimited. */
+        public requestDelimited: boolean;
+
+        /** Whether responses are length-delimited. */
+        public responseDelimited: boolean;
+
+        /**
+         * Calls the correct implementation for a given method
+         * @param methodName The method to call
+         * @param requestData Data from the request
+         * @param callback The callback function
+         * @returns {undefined}
+         */
+        public rpcHandler(methodName: string, requestData: Uint8Array, callback: RPCImplCallback);
+    }
 }
 
 /**
